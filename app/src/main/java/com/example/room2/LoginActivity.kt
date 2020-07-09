@@ -15,7 +15,6 @@ class LoginActivity : AppCompatActivity() {
         bt_crear_cuenta.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         bt_iniciar_sesion.setOnClickListener {

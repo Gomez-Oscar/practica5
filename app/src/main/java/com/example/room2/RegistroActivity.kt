@@ -1,6 +1,5 @@
 package com.example.room2
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,27 +36,12 @@ class RegistroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Las contraseñan NO coinciden", Toast.LENGTH_SHORT).show()
 
             } else {
-
                 val usuario = Usuario(NULL, nombre, correo, contrasena)
                 val usuarioDAO: UsuarioDAO = ROOM2.database2.UsuarioDAO()
 
                 usuarioDAO.crearUsuario(usuario)
-
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-
+                onBackPressed()
             }
-
         }
-
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
