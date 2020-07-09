@@ -1,4 +1,4 @@
-package com.example.room2.model
+package com.example.room2.model.local
 
 import androidx.room.ColumnInfo // con columninfo se le da el nombre a las columnas
 import androidx.room.Entity

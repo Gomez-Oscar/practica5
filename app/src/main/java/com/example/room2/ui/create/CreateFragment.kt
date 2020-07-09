@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.room2.R
-import com.example.room2.ROOM2
-import com.example.room2.model.Deudor
-import com.example.room2.model.DeudorDAO
+import com.example.room2.model.remote.DeudorRemote
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_create.*
-import java.sql.Types.NULL
 
 class CreateFragment : Fragment() {
 
@@ -26,6 +27,10 @@ class CreateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mostrarMensajeBienvenida()
+
+
 
         bt_guardar.setOnClickListener{
             val nombre = et_nombre.text.toString()
@@ -43,16 +48,43 @@ class CreateFragment : Fragment() {
 
             }else{
 
-                val deudor = Deudor(NULL, nombre, telefono, cantidad.toLong())
-                val deudorDAO: DeudorDAO = ROOM2.database.DeudorDao()
+                //val deudor = Deudor(NULL, nombre, telefono, cantidad.toLong())
+                //val deudorDAO: DeudorDAO = ROOM2.database.DeudorDao()
+                //deudorDAO.crearDeudor(deudor)
 
-                deudorDAO.crearDeudor(deudor)
+                guardarEnFireBase(nombre,telefono,cantidad.toLong())
 
-                et_nombre.setText("")//se limpian los campos de entrada
-                et_telefono.setText("")
-                et_cantidad.setText("")
+                cleanEditText()
             }
 
         }
+    }
+
+    private fun mostrarMensajeBienvenida() {
+        val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+        val user: FirebaseUser? = mAuth.currentUser
+        //se accede a los datos almacenado en firebase
+        val correo = user?.email
+        Toast.makeText(context, "$correo", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun guardarEnFireBase(nombre: String, telefono: String, cantidad: Long) {
+        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myRef : DatabaseReference = database.getReference("deudores")
+        val id = myRef.push().key
+
+        val deudor = DeudorRemote(
+            id,
+            nombre,
+            telefono,
+            cantidad
+        )
+        myRef.child(id!!).setValue(deudor)
+    }
+
+    private fun cleanEditText() {
+        et_nombre.setText("")//se limpian los campos de entrada
+        et_telefono.setText("")
+        et_cantidad.setText("")
     }
 }

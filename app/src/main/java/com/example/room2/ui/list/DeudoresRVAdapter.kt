@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.room2.R
-import com.example.room2.model.Deudor
+import com.example.room2.model.local.Deudor
 import kotlinx.android.synthetic.main.item_deudor.view.*
 
 class DeudoresRVAdapter(

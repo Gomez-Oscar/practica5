@@ -1,7 +1,6 @@
 package com.example.room2.usuario
 
 import androidx.room.*
-import com.example.room2.model.Deudor
 
 @Dao
 interface UsuarioDAO {

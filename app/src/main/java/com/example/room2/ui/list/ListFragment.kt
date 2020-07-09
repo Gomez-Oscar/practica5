@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.room2.R
 import com.example.room2.ROOM2
-import com.example.room2.model.Deudor
-import com.example.room2.model.DeudorDAO
+import com.example.room2.model.local.Deudor
+import com.example.room2.model.local.DeudorDAO
 
 
 class ListFragment : Fragment() {

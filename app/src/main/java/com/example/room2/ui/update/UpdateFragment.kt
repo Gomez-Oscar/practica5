@@ -8,9 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.room2.R
 import com.example.room2.ROOM2
-import com.example.room2.model.Deudor
-import com.example.room2.model.DeudorDAO
-import kotlinx.android.synthetic.main.fragment_read.*
+import com.example.room2.model.local.Deudor
+import com.example.room2.model.local.DeudorDAO
 import kotlinx.android.synthetic.main.fragment_update.*
 import kotlinx.android.synthetic.main.fragment_update.bt_buscar
 import kotlinx.android.synthetic.main.fragment_update.et_nombre

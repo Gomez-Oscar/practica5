@@ -2,7 +2,7 @@ package com.example.room2
 //esta clase se debe llamar igual al nombre del paquete
 import android.app.Application
 import androidx.room.Room
-import com.example.room2.model.DeudorDataBase
+import com.example.room2.model.local.DeudorDataBase
 import com.example.room2.usuario.UsuarioDataBase
 
 //para hacer que esto se ejecute se debe modificar el manifest

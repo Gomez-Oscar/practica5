@@ -1,6 +1,7 @@
-package com.example.room2.model
+package com.example.room2.model.local
 
 import androidx.room.*
+import com.example.room2.model.local.Deudor
 
 @Dao
 interface DeudorDAO {
