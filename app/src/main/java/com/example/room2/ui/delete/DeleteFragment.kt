@@ -1,5 +1,6 @@
 package com.example.room2.ui.delete
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,10 +31,30 @@ class DeleteFragment : Fragment() {
             val deudor = deudorDAO.buscarDeudor(nombre)
 
             if(deudor != null){
-                deudorDAO.borrarDeudor(deudor)
+
+                val alertDialog: AlertDialog? = activity?.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.apply {
+                        setMessage("¿Desea Eliminar a $nombre?")
+                        setPositiveButton("Aceptar"){ dialog, id ->
+                            deudorDAO.borrarDeudor(deudor)
+                        }
+                        setNegativeButton("Cancelar"){dialog, id ->}
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
             }else{
                 Toast.makeText(context,"Deudor no Encontrado",Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+
+
+
+
+
+
+
+

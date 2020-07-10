@@ -89,7 +89,9 @@ class UpdateFragment : Fragment() {
                 deudorDAO.actualizarDeudor(deudor)
 
                 et_telefono.visibility = View.GONE
+                lo_telefono.visibility = View.GONE
                 et_cantidad.visibility = View.GONE
+                lo_cantidad.visibility = View.GONE
                 bt_buscar.visibility = View.VISIBLE
                 bt_actualizar.visibility = View.GONE
             }

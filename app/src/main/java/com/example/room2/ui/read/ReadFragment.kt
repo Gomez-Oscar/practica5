@@ -36,11 +36,9 @@ class ReadFragment : Fragment() {
                 tv_resultado.text =
                     "Nombre: ${deudor.nombre}\nTelefono: ${deudor.telefono}\nCantidad: ${deudor.cantidad}"
 
-            }else{
-                Toast.makeText(context,"Deudor no existe",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Deudor no existe", Toast.LENGTH_SHORT).show()
             }
-
         }
-
     }
 }
