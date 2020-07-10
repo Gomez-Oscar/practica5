@@ -47,12 +47,11 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     showMessage("Authentication failed.")
                     Log.w("TAG", "signInWithEmail:failure", task.exception)
-
                 }
             }
     }
 
-    //single responsability = cada función debe tener una sola responsabilidad
+    //single responsability => cada función debe tener una sola responsabilidad
     private fun showMessage(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }

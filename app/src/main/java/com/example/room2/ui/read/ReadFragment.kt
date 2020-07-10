@@ -23,23 +23,18 @@ class ReadFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_read, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_read, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         bt_buscar.setOnClickListener {
-
             val nombre = et_nombre.text.toString()
 
             //buscarEnRoom(nombre)
-
             buscarEnFireBase(nombre)
-
         }
-
     }
 
     private fun buscarEnFireBase(nombre: String) {
@@ -48,22 +43,21 @@ class ReadFragment : Fragment() {
         val myRef = database.getReference("deudores")
         var deudorExiste = false
 
-        val postListener = object: ValueEventListener{
+        val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 //con esto se visualuza en consola la info de la base de datos
                 //Log.d("data",snapshot.toString())
-                for(datasnapshot:DataSnapshot in snapshot.children){
+                for (datasnapshot: DataSnapshot in snapshot.children) {
                     val deudor = datasnapshot.getValue(DeudorRemote::class.java)
-                    if (deudor?.nombre == nombre){
+                    if (deudor?.nombre == nombre) {
                         deudorExiste = true
-                        mostrarDeudor(deudor.nombre,deudor.telefono,deudor.cantidad)
+                        mostrarDeudor(deudor.nombre, deudor.telefono, deudor.cantidad)
                     }
                 }
                 if (!deudorExiste)
-                    Toast.makeText(context,"Deudor no existe",Toast.LENGTH_SHORT).show()
-
+                    Toast.makeText(context, "Deudor no existe", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -76,7 +70,7 @@ class ReadFragment : Fragment() {
         val deudor = deudorDAO.buscarDeudor(nombre)
 
         if (deudor != null) {
-            mostrarDeudor(deudor.nombre,deudor.telefono,deudor.cantidad)
+            mostrarDeudor(deudor.nombre, deudor.telefono, deudor.cantidad)
 
         } else {
             Toast.makeText(context, "Deudor no existe", Toast.LENGTH_SHORT).show()

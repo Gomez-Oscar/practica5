@@ -22,8 +22,6 @@
     <string name="nombre_list">NOMBRE</string>
     <string name="deuda_list">DEUDA</string>
 
-    <string name="todo">TODO</string>
-
     <string name="correo">Correo electrónico:</string>
     <string name="contrasena_login">Contraseña:</string>
     <string name="titulo_login">INICIA SESIÓN A TU CUENTA</string>
@@ -35,6 +33,7 @@
     <string name="contrasena">Contraseña: Mínimo 6 dígtos</string>
     <string name="contrasenax2">Repetir Contraseña:</string>
     <string name="registrar">Registrar</string>
+    <string name="todo">TODO</string>
 
 
 </resources>

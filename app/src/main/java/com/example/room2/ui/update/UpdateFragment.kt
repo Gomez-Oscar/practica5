@@ -14,19 +14,17 @@ import com.example.room2.model.local.DeudorDAO
 import com.example.room2.model.remote.DeudorRemote
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_update.*
-import kotlinx.android.synthetic.main.fragment_update.bt_buscar
-import kotlinx.android.synthetic.main.fragment_update.et_nombre
 
 class UpdateFragment : Fragment() {
 
-    var idDeudorFireBase : String? = ""
+    var idDeudorFireBase: String? = ""
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-       return inflater.inflate(R.layout.fragment_update, container, false)
+        return inflater.inflate(R.layout.fragment_update, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +33,6 @@ class UpdateFragment : Fragment() {
         hideDeudorDatosET()
 
         var idDeudor = 0
-
         val deudorDAO: DeudorDAO = ROOM2.database.DeudorDao()
 
         //estas variables se ponen aqui para evitar repetir codigo
@@ -46,33 +43,28 @@ class UpdateFragment : Fragment() {
             val nombre = et_nombre.text.toString()
 
             //buscarEnRoom(deudorDAO, nombre, idDeudor)
-
-            buscarEnFireBase(nombre,myRef)
-
+            buscarEnFireBase(nombre, myRef)
         }
 
-        bt_actualizar.setOnClickListener{
+        bt_actualizar.setOnClickListener {
 
             val nombre = et_nombre.text.toString()
             val telefono = et_telefono.text.toString()
             val cantidad = et_cantidad.text.toString()
 
-
             if (nombre.isEmpty() || nombre.isBlank()) {
-                Toast.makeText(context,"Ingrese un Nombre",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Ingrese un Nombre", Toast.LENGTH_SHORT).show()
 
-            }else if(telefono.isEmpty() || telefono.isBlank()){
-                Toast.makeText(context,"Ingrese un Teléfono",Toast.LENGTH_SHORT).show()
+            } else if (telefono.isEmpty() || telefono.isBlank()) {
+                Toast.makeText(context, "Ingrese un Teléfono", Toast.LENGTH_SHORT).show()
 
-            }else if(cantidad.isEmpty() || cantidad.isBlank()){
-                Toast.makeText(context,"Ingrese una Cantidad",Toast.LENGTH_SHORT).show()
+            } else if (cantidad.isEmpty() || cantidad.isBlank()) {
+                Toast.makeText(context, "Ingrese una Cantidad", Toast.LENGTH_SHORT).show()
 
-            }else {
+            } else {
 
                 //actualizarEnRoom(idDeudor, nombre, telefono, cantidad, deudorDAO)
-
                 actualizarEnFireBase(myRef)
-
                 habilitarWidgetsBuscar()
             }
 
@@ -124,14 +116,14 @@ class UpdateFragment : Fragment() {
         val myRef = database.getReference("deudores")
         var deudorExiste = false
 
-        val postListener = object: ValueEventListener {
+        val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("Buscar","Entro")
-                for(datasnapshot: DataSnapshot in snapshot.children){
+                Log.d("Buscar", "Entro")
+                for (datasnapshot: DataSnapshot in snapshot.children) {
                     val deudor = datasnapshot.getValue(DeudorRemote::class.java)
-                    if (deudor?.nombre == nombre){
+                    if (deudor?.nombre == nombre) {
                         deudorExiste = true
                         habilitarWidgetsActualizar()
                         et_telefono.setText(deudor.telefono)
@@ -140,7 +132,7 @@ class UpdateFragment : Fragment() {
                     }
                 }
                 if (!deudorExiste)
-                    Toast.makeText(context,"Deudor no existe",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Deudor no existe", Toast.LENGTH_SHORT).show()
 
             }
         }
